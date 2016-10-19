@@ -3,6 +3,8 @@ var Header = React.createClass({
     return (
       <header className="header">
         <h1>CountCals</h1>
+
+        <ChubGraph />
       </header>
     );
   }
