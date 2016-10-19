@@ -4,8 +4,8 @@ var FoodList = React.createClass({
       <ul className="foodlist">
         {this.props.foods.map(function(food, index){
           return (
-            <li className="foodlist__item">
-              <FoodItem data={food} key={index} />
+            <li className="foodlist__item" key={index}>
+              <FoodItem data={food} />
             </li>
           );
         })}
