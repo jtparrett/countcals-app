@@ -1,7 +1,17 @@
 [{
     "name": "Testing",
-    "calories": 400
+    "calories": 400,
+    "time": 10
 },{
     "name": "Testing 2",
-    "calories": 500
+    "calories": 500,
+    "time": 12
+},{
+    "name": "Testing 3",
+    "calories": 100,
+    "time": 13
+},{
+    "name": "Testing 3",
+    "calories": 500,
+    "time": 22
 }]
