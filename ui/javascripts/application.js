@@ -3,7 +3,7 @@ var App = React.createClass({
     return (
       <div>
         <Header />
-        <FoodList date={new Date()} />
+        <FoodList date={'2016-10-19'} />
       </div>
     );
   }
