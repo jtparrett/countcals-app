@@ -1,4 +1,6 @@
 .DS_Store
 .sass-cache
+node_modules
 build/app/stylesheets/
-stylesheets/bourbon/
+build/app/javascripts/
+ui/stylesheets/bourbon/

@@ -1,7 +1,3 @@
-cd stylesheets/
-bourbon install
-cd ../
-sass --watch stylesheets/application.sass:build/app/stylesheets/application.css
+sass --watch ui/stylesheets/application.sass:build/app/stylesheets/application.css
 
-cd build/
-php -S 0.0.0.0:3000
+babel --watch --plugins transform-react-jsx ui/javascripts --out-file build/app/javascripts/application.js
