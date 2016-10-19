@@ -16,8 +16,8 @@ var App = React.createClass({
     return (
       <div className="page">
         <header className="header">
-          <HeaderTotal foods={this.state.foods} />
           <ChubGraph foods={this.state.foods} total={this.state.total} />
+          <HeaderTotal foods={this.state.foods} />
         </header>
         <FoodList foods={this.state.foods} />
       </div>
