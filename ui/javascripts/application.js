@@ -1,6 +1,7 @@
 var App = React.createClass({
   getInitialState: function(){
     return {
+      total: 2500,
       foods: []
     };
   },
@@ -16,7 +17,7 @@ var App = React.createClass({
       <div className="page">
         <header className="header">
           <HeaderTotal foods={this.state.foods} />
-          <ChubGraph foods={this.state.foods} />
+          <ChubGraph foods={this.state.foods} total={this.state.total} />
         </header>
         <FoodList foods={this.state.foods} />
       </div>
