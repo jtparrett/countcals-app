@@ -13,5 +13,9 @@
 },{
     "name": "Testing 3",
     "calories": 500,
+    "time": 16
+},{
+    "name": "Fat food",
+    "calories": 700,
     "time": 22
 }]
