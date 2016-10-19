@@ -1,14 +1,14 @@
 var ChubGraph = React.createClass({
   componentDidUpdate:function(){
-    var canvas = this.refs.canvas;
-    var context = canvas.getContext('2d');
-    var y, count = 0;
+    let canvas = this.refs.canvas;
+    let context = canvas.getContext('2d');
+    let y, count = 0;
 
     context.beginPath();
     context.moveTo(0, canvas.height);
-    this.props.foods.forEach(function(food){
+    this.props.foods.map(function(food){
+      let x = food.time * (canvas.width / 24);
       count += food.calories;
-      var x = food.time * (canvas.width / 24);
       y = canvas.height - (count * ((canvas.height / 2) / this.props.total));
       context.lineTo(x, y);
     }.bind(this));
