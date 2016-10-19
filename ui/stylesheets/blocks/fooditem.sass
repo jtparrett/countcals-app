@@ -1,2 +1,18 @@
 .fooditem
-  @extend %copy
+  +display(flex)
+  +align-items(center)
+  +padding(20px)
+  margin-right: -10px
+  border-bottom: 1px solid #ddd
+
+  > *
+    +flex(none)
+    margin-right: 10px
+
+  &__title
+    @extend %copy
+    font-weight: 700
+    margin-right: auto
+
+  &__calories
+    @extend %copy
