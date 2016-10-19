@@ -2,7 +2,8 @@ var App = React.createClass({
   render: function(){
     return (
       <div>
-      Hello World!
+        <Header />
+        <FoodList date={new Date()} />
       </div>
     );
   }
