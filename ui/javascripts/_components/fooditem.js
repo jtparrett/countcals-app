@@ -1,7 +1,7 @@
 var FoodItem = React.createClass({
   getInitialState: function(){
     let emojis = {
-      '😄': 300,
+      '😄': 0,
       '😁': 500,
       '😐': 700,
       '😵': 1000
