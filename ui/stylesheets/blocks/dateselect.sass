@@ -1,0 +1,19 @@
+.date-select
+  +display(flex)
+  &:after
+    +flex(none)
+    +size(16px)
+    content: ""
+    margin-left: 5px
+    display: block
+    background-image: url('../images/icon-calendar.svg')
+  select
+    @extend %copy
+    +appearance(none)
+    background: transparent
+    border: 0
+    outline: none
+    border-radius: 0px
+    color: #fff
+    font-size: 14px
+    font-weight: 700

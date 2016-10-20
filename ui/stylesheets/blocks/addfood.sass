@@ -1,8 +1,8 @@
 .addfood
-  &__input
-    @extend %copy
-    +padding(20px)
-    border: 0px
-    width: 100%
-    outline: none
-    line-height: initial
+  +display(flex)
+
+  > *
+    +flex(none)
+
+  &__foodname
+    +flex(1)

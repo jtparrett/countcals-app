@@ -15,6 +15,7 @@ var App = React.createClass({
   render: function(){
     return (
       <div className="page">
+        <Nav />
         <header className="header">
           <ChubGraph foods={this.state.foods} total={this.state.total} />
           <HeaderTotal foods={this.state.foods} />
