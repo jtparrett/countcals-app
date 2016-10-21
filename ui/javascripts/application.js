@@ -2,28 +2,39 @@ var App = React.createClass({
   getInitialState: function(){
     return {
       total: 2500,
-      date: '09-19-2016',
       foods: []
     };
   },
   getFoods: function(){
-    new API('foods', { date: this.state.date }).then(function(data){
+    new API('entries', {
+      token: '123',
+      start_time: this.state.start_time,
+      end_time: this.state.end_time
+    }).then(function(data){
       this.setState({
         foods: data
       });
     }.bind(this));
   },
-  addFood: function(foodData){
-    this.state.foods.push(foodData);
+  getTime: function(date){
+    var curDate = (date)? new Date(date) : new Date();
+    var start_time = new Date(curDate.getFullYear(), curDate.getMonth(), curDate.getDate());
+    var end_time = start_time + 86400;
+    this.setState({
+      start_time: start_time / 1000,
+      end_time: end_time / 1000
+    });
+  },
+  addFood: function(data){
+    this.state.foods.push(data);
     this.forceUpdate();
   },
   componentWillMount: function(){
+    this.getTime();
     this.getFoods();
   },
   onChange: function(event){
-    this.setState({
-      date: event.target.value
-    });
+    this.getTime(event.target.value);
     this.getFoods();
   },
   render: function(){
