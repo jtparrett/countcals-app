@@ -1,6 +1,8 @@
-var API = function(filename, body){
+var API = function(filename, data){
+  var endpoint = new URL('http://138.68.149.32/api/' + filename);
+  Object.keys(data).forEach(key => endpoint.searchParams.append(key, data[key]));
   return new Promise(function(resolve, reject){
-    fetch('http://localhost:8000/api/' + filename, { method: 'POST', data: body, mode: 'cors' }).then(function(data){
+    fetch(endpoint).then(function(data){
       return data.json();
     }).then(resolve);
   });

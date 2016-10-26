@@ -1,3 +1,10 @@
+new API('auth', {
+  username: 'guest',
+  password: 1234
+}).then(function(data){
+  console.log(data.data);
+});
+
 var App = React.createClass({
   getInitialState: function(){
     return {
@@ -7,7 +14,6 @@ var App = React.createClass({
   },
   getFoods: function(){
     new API('entries', {
-      token: '123',
       start_time: this.state.start_time,
       end_time: this.state.end_time
     }).then(function(data){
