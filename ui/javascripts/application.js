@@ -1,30 +1,36 @@
-new API('auth', {
-  username: 'guest',
-  password: 1234
-}).then(function(data){
-  console.log(data.data);
-});
-
 var App = React.createClass({
   getInitialState: function(){
     return {
       total: 2500,
+      token: false,
       foods: []
     };
   },
   getFoods: function(){
     new API('entries', {
-      start_time: this.state.start_time,
-      end_time: this.state.end_time
+      token: this.state.token,
+      timestamp_start: this.state.start_time,
+      timestamp_end: this.state.end_time
     }).then(function(data){
       this.setState({
         foods: data
       });
     }.bind(this));
   },
+  auth: function(callback){
+    new API('auth', {
+      username: 'guest',
+      password: 1234
+    }).then(function(data){
+      this.setState({
+        token: data.data
+      });
+      callback();
+    }.bind(this));
+  },
   getTime: function(date){
     var curDate = (date)? new Date(date) : new Date();
-    var start_time = new Date(curDate.getFullYear(), curDate.getMonth(), curDate.getDate());
+    var start_time = new Date(curDate.getFullYear(), curDate.getMonth(), curDate.getDate()).getTime();
     var end_time = start_time + 86400;
     this.setState({
       start_time: start_time / 1000,
@@ -36,8 +42,10 @@ var App = React.createClass({
     this.forceUpdate();
   },
   componentWillMount: function(){
-    this.getTime();
-    this.getFoods();
+    this.auth(function(){
+      this.getTime();
+      this.getFoods();
+    }.bind(this));
   },
   onChange: function(event){
     this.getTime(event.target.value);
