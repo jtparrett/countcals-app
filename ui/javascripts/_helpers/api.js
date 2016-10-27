@@ -4,6 +4,12 @@ var API = function(filename, data){
   return new Promise(function(resolve, reject){
     fetch(endpoint).then(function(data){
       return data.json();
-    }).then(resolve);
+    }).then(function(data){
+      if(data.success){
+        resolve(data);
+      } else {
+        reject(data);
+      }
+    });
   });
 };
