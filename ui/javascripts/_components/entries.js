@@ -11,15 +11,20 @@ var Entries = React.createClass({
     }).then(this.getFoods);
   },
   getFoods: function(res){
-    let entries = [];
     res.data.map(function(entry){
-      new API('foods/get', {
+      this.addFood({
         id: entry['food_id']
-      }).then(function(res){
-        entries.push(res);
       });
+    }.bind(this));
+  },
+  addFood: function(res){
+    var entries = this.state.entries;
+    new GetFood(res.id).then(function(res){
+      entries.push(res);
+    }.bind(this));
+    this.setState({
+      entries: entries
     });
-    this.setState({ entries: entries });
   },
   render: function(){
     return (
@@ -37,6 +42,9 @@ var Entries = React.createClass({
               </li>
             );
           })}
+          <li className="entries__item">
+            <AddFoodForm addFood={this.addFood} />
+          </li>
         </ul>
       </div>
     );
