@@ -8,11 +8,18 @@ var Entries = React.createClass({
     new API('entries', {
       'timestamp-start': 0,
       'timestamp-end': 200,
-    }).then(function(res){
-      this.setState({
-        entries: res.data
+    }).then(this.getFoods);
+  },
+  getFoods: function(res){
+    let entries = [];
+    res.data.map(function(entry){
+      new API('foods/get', {
+        id: entry['food_id']
+      }).then(function(res){
+        entries.push(res);
       });
-    }.bind(this));
+    });
+    this.setState({ entries: entries });
   },
   render: function(){
     return (
