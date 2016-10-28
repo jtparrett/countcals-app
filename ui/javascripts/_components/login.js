@@ -7,7 +7,7 @@ var Login = React.createClass({
   },
   onSubmit: function(e){
     e.preventDefault();
-    var data = {};
+    let data = {};
     for(key in this.refs){
       data[key] = this.refs[key].value;
     }
