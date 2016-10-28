@@ -6,12 +6,12 @@ var ChubGraph = React.createClass({
 
     context.beginPath();
     context.moveTo(0, canvas.height);
-    this.props.foods.map(function(food){
+    this.props.entries.map(function(food){
       let x = food.time * (canvas.width / 24);
       count += food.calories;
       y = canvas.height - (count * ((canvas.height / 2) / this.props.total));
       context.lineTo(x, y);
-    }.bind(this));
+    });
     context.lineTo(canvas.width, y);
     context.lineTo(canvas.width, canvas.height);
     context.fill();

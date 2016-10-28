@@ -1,7 +1,7 @@
 var HeaderTotal = React.createClass({
   render: function(){
     let total = 0;
-    this.props.foods.map(function(food){
+    this.props.entries.map(function(food){
       total += food.calories;
     });
     return (

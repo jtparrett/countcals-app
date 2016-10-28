@@ -1,6 +1,9 @@
 var API = function(filename, data){
   var endpoint = new URL('http://138.68.149.32/api/' + filename);
-  Object.keys(data).forEach(key => endpoint.searchParams.append(key, data[key]));
+  endpoint.searchParams.append('token', CC.token);
+  if(data){
+    Object.keys(data).forEach(key => endpoint.searchParams.append(key, data[key]));
+  }
   return new Promise(function(resolve, reject){
     fetch(endpoint).then(function(data){
       return data.json();
