@@ -20,7 +20,7 @@ var Entries = React.createClass({
   addFood: function(res){
     var entries = this.state.entries;
     new GetFood(res.id).then(function(res){
-      entries.push(res);
+      entries.push(res.data);
     }.bind(this));
     this.setState({
       entries: entries
