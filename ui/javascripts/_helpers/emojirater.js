@@ -5,7 +5,7 @@ var EmojiRater = function(val){
     '😐': 700,
     '😵': 1000
   };
-  let emoji = Object.keys(emojis)[0];
+  var emoji = Object.keys(emojis)[0];
   Object.keys(emojis).map(function(key){
     if(val >= emojis[key]){
       emoji = key;
