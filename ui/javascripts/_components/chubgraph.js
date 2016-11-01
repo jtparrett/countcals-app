@@ -11,7 +11,7 @@ var ChubGraph = React.createClass({
       count += food.calories;
       y = canvas.height - (count * ((canvas.height / 2) / this.props.total));
       context.lineTo(x, y);
-    });
+    }.bind(this));
     context.lineTo(canvas.width, y);
     context.lineTo(canvas.width, canvas.height);
     context.fill();

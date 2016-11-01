@@ -7,9 +7,6 @@ var Entries = React.createClass({
   componentWillMount: function(){
     this.callApi();
   },
-  componentDidUpdate: function(){
-    this.callApi();
-  },
   callApi: function(){
     new API('entries', {
       'timestamp-start': this.props.date,
@@ -17,16 +14,11 @@ var Entries = React.createClass({
     }).then(this.getFoods);
   },
   getFoods: function(res){
+    var entries = [];
     res.data.map(function(entry){
-      this.addFood({
-        id: entry['food_id']
+      new GetFood(entry['food_id']).then(function(res){
+        entries.push(res.data);
       });
-    }.bind(this));
-  },
-  addFood: function(res){
-    var entries = this.state.entries;
-    new GetFood(res.id).then(function(res){
-      entries.push(res.data);
     }.bind(this));
     this.setState({
       entries: entries
@@ -36,7 +28,7 @@ var Entries = React.createClass({
     return (
       <div>
         <header className="header">
-          <ChubGraph entries={this.state.entries} />
+          <ChubGraph entries={this.state.entries} total="2500" />
           <HeaderTotal entries={this.state.entries} />
         </header>
 
@@ -49,7 +41,7 @@ var Entries = React.createClass({
             );
           })}
           <li className="entries__item">
-            <AddFoodForm addFood={this.addFood} />
+            <AddFoodForm onUpdate={this.callApi} />
           </li>
         </ul>
       </div>
