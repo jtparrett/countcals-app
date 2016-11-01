@@ -1,7 +1,8 @@
 var Entries = React.createClass({
   getInitialState: function(){
     return {
-      entries: []
+      entries: [],
+      date: this.props.date
     };
   },
   componentDidMount: function(){
