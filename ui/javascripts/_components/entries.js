@@ -1,22 +1,33 @@
 var Entries = React.createClass({
   getInitialState: function(){
     return {
-      entries: [],
-      date: this.props.date
+      entries: []
     };
   },
   componentDidMount: function(){
-    this.callApi();
+    this.callApi(this.props.date);
   },
-  callApi: function(){
+  update: function(){
+    this.callApi(this.props.date);
+  },
+  componentWillReceiveProps: function(nextProps){
+    this.callApi(nextProps.date);
+  },
+  callApi: function(date){
     new API('entries', {
-      'timestamp-start': this.props.date,
-      'timestamp-end': this.props.date + 86400,
+      'timestamp-start': date,
+      'timestamp-end': date + 86400,
     }).then(this.getFoods);
   },
-  getFoods: function(entries){
+  getFoods: function(res){
     var foods = [];
-    entries.data.map(function(entry, index){
+    if(res.data.length <= 0){
+      this.setState({
+        entries: foods
+      });
+      return false;
+    }
+    res.data.map(function(entry, index){
       new API('foods/get', {
         id: entry['food_id']
       }).then(function(food){
@@ -24,10 +35,10 @@ var Entries = React.createClass({
           id: food.data.id,
           name: food.data.name,
           calories: parseInt(food.data.calories),
-          time: new Date(parseInt(entry.timestamp)).getHours()
+          time: new Date(parseInt(entry.timestamp) * 1000).getHours()
         };
 
-        if(foods.length === entries.data.length){
+        if(foods.length === res.data.length){
           this.setState({
             entries: foods
           });
@@ -52,7 +63,7 @@ var Entries = React.createClass({
             );
           })}
           <li className="entries__item">
-            <AddFoodForm onUpdate={this.callApi} />
+            <AddFoodForm onUpdate={this.update} />
           </li>
         </ul>
       </div>
