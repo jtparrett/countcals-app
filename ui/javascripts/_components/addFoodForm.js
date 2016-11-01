@@ -1,8 +1,12 @@
 var AddFoodForm = React.createClass({
   onSubmit: function(e){
     e.preventDefault();
-    let data = {
-      timestamp: Math.floor(new Date().getTime() / 1000)
+    var now = new Date();
+    var today = Math.floor(new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime() / 1000);
+    var currentTime = (now / 1000) - today;
+    var day = new Date((this.props.date + currentTime) * 1000);
+    var data = {
+      timestamp: Math.floor(day.getTime() / 1000)
     };
     for(key in this.refs){
       data[key] = this.refs[key].value;

@@ -1,5 +1,6 @@
 .date-select
   +display(flex)
+  +align-items(center)
   &:after
     +flex(none)
     +size(16px)
@@ -7,7 +8,7 @@
     margin-left: 5px
     display: block
     background-image: url('../images/icon-calendar.svg')
-  select
+  input
     @extend %copy
     +appearance(none)
     background: transparent
@@ -15,5 +16,6 @@
     outline: none
     border-radius: 0px
     color: #fff
+    text-align: right
     font-size: 14px
     font-weight: 700

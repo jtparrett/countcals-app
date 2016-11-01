@@ -2,7 +2,7 @@ var Main = React.createClass({
   getInitialState: function(){
     var now = new Date();
     return {
-      date: Math.floor(new Date((now.getMonth() + 1) + '/' + now.getDate() + '/' + now.getFullYear()).getTime() / 1000)
+      date: Math.floor(new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime() / 1000)
     };
   },
   setDate: function(date){

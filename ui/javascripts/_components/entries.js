@@ -1,7 +1,8 @@
 var Entries = React.createClass({
   getInitialState: function(){
     return {
-      entries: []
+      entries: [],
+      date: this.props.date
     };
   },
   componentDidMount: function(){
@@ -14,6 +15,9 @@ var Entries = React.createClass({
     this.callApi(nextProps.date);
   },
   callApi: function(date){
+    this.setState({
+      date: date
+    });
     new API('entries', {
       'timestamp-start': date,
       'timestamp-end': date + 86400,
@@ -33,6 +37,7 @@ var Entries = React.createClass({
       }).then(function(food){
         foods[index] = {
           id: food.data.id,
+          entry: entry.id,
           name: food.data.name,
           calories: parseInt(food.data.calories),
           time: new Date(parseInt(entry.timestamp) * 1000).getHours()
@@ -58,12 +63,12 @@ var Entries = React.createClass({
           {this.state.entries.map(function(food, index){
             return (
               <li className="entries__item" key={index}>
-                <Food data={food} />
+                <Food data={food} onUpdate={this.update} />
               </li>
             );
-          })}
+          }.bind(this))}
           <li className="entries__item">
-            <AddFoodForm onUpdate={this.update} />
+            <AddFoodForm onUpdate={this.update} date={this.state.date}/>
           </li>
         </ul>
       </div>
