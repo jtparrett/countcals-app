@@ -4,7 +4,7 @@ var Entries = React.createClass({
       entries: []
     };
   },
-  componentWillMount: function(){
+  componentDidMount: function(){
     this.callApi();
   },
   callApi: function(){
@@ -13,23 +13,28 @@ var Entries = React.createClass({
       'timestamp-end': this.props.date + 86400,
     }).then(this.getFoods);
   },
-  getFoods: function(res){
+  getFoods: function(entries){
     var foods = [];
-    res.data.map(function(entry, index){
-      new GetFood(entry['food_id']).then(function(food){
-        foods.push({
-          id: 1,
-          name: 'test',
-          calories: parseInt(food.calories)
-        });
-      });
+    entries.data.map(function(entry, index){
+      new API('foods/get', {
+        id: entry['food_id']
+      }).then(function(food){
+        foods[index] = {
+          id: food.data.id,
+          name: food.data.name,
+          calories: parseInt(food.data.calories),
+          time: new Date(parseInt(entry.timestamp)).getHours()
+        };
+
+        if(foods.length === entries.data.length){
+          this.setState({
+            entries: foods
+          });
+        }
+      }.bind(this));
     }.bind(this));
-    this.setState({
-      entries: foods
-    });
   },
   render: function(){
-    console.log(this.state.entries);
     return (
       <div>
         <header className="header">
