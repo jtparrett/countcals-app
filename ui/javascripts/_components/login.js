@@ -3,6 +3,7 @@ var Login = React.createClass({
     new API('auth', data).then(function(res){
       CC.token = res.data;
       localStorage.setItem('API_TOKEN', res.data);
+      window.location.href = '/';
     });
   },
   onSubmit: function(e){

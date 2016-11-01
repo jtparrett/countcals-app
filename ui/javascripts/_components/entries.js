@@ -5,9 +5,15 @@ var Entries = React.createClass({
     };
   },
   componentWillMount: function(){
+    this.callApi();
+  },
+  componentDidUpdate: function(){
+    this.callApi();
+  },
+  callApi: function(){
     new API('entries', {
-      'timestamp-start': 0,
-      'timestamp-end': 200,
+      'timestamp-start': this.props.date,
+      'timestamp-end': this.props.date + 86400,
     }).then(this.getFoods);
   },
   getFoods: function(res){

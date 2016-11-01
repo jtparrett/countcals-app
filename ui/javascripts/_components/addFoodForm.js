@@ -1,7 +1,9 @@
 var AddFoodForm = React.createClass({
   onSubmit: function(e){
     e.preventDefault();
-    let data = {};
+    let data = {
+      timestamp: new Date().getTime()
+    };
     for(key in this.refs){
       data[key] = this.refs[key].value;
       this.refs[key].value = '';
