@@ -14,17 +14,22 @@ var Entries = React.createClass({
     }).then(this.getFoods);
   },
   getFoods: function(res){
-    var entries = [];
-    res.data.map(function(entry){
-      new GetFood(entry['food_id']).then(function(res){
-        entries.push(res.data);
+    var foods = [];
+    res.data.map(function(entry, index){
+      new GetFood(entry['food_id']).then(function(food){
+        foods.push({
+          id: 1,
+          name: 'test',
+          calories: parseInt(food.calories)
+        });
       });
     }.bind(this));
     this.setState({
-      entries: entries
+      entries: foods
     });
   },
   render: function(){
+    console.log(this.state.entries);
     return (
       <div>
         <header className="header">
